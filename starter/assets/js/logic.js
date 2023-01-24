@@ -34,34 +34,37 @@ startbutton.addEventListener("click", function () {
 
 // click even inside of the retrieveQuestion function
 function retrieveQustion() {
-  var questionTitle = document.getElementById("question-title");
-  var questionChoices = document.getElementById("choices");
-  questionChoices.innerHTML = "";
-  //var currentQuestion = question[currentQuestionIndex];
-  // get current question object from array
-  var question = questions[currentQuestionIndex];
-  //console.log(question);
-  // update title with current question
-  //var questionTitle = document.getElementById("question-title");
-  questionTitle.textContent = question.title;
+  if(currentQuestionIndex < 5){
+    var questionTitle = document.getElementById("question-title");
+    var questionChoices = document.getElementById("choices");
+    questionChoices.innerHTML = "";
+    //var currentQuestion = question[currentQuestionIndex];
+    // get current question object from array
+    var question = questions[currentQuestionIndex];
+    //console.log(question);
+    // update title with current question
+    //var questionTitle = document.getElementById("question-title");
+    questionTitle.textContent = question.title;
 
-  for (var i = 0; i < question.choices.length; i++) {
-    var choice = document.createElement("button");
-    choice.setAttribute("class", "choice");
-    choice.setAttribute("value", choice);
-    choice.textContent = question.choices[i];
-    //console.log(choice);
-    questionChoices.appendChild(choice); // moved this into the loop bc we need to add them to the page after adding the event listener
-    // add an event listener to each choice
-    // check the answer
-    if (currentQuestionIndex < 5) {
+    for (var i = 0; i < question.choices.length; i++) {
+      var choice = document.createElement("button");
+      choice.setAttribute("class", "choice");
+      choice.setAttribute("value", choice);
+      choice.textContent = question.choices[i];
+      //console.log(choice);
+      questionChoices.appendChild(choice); // moved this into the loop bc we need to add them to the page after adding the event listener
+      // add an event listener to each choice
+      // check the answer
       choice.addEventListener("click", questionClick);
-    } else {
-      endQuiz();
-    }
+  }
+  
+      //choice.addEventListener("click", questionClick);
 
     // clear out any old question choices
     //questionChoices.innerHTML = "";
+  }else {
+    endQuiz();
+    timer.innerHTML = "0";
   }
   // clear out any old question choices
   // questionChoices.innerHTML = "";
