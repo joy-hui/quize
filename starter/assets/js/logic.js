@@ -65,6 +65,7 @@ function retrieveQustion() {
   }else {
     endQuiz();
     timer.innerHTML = "0";
+    clearInterval(timerInterval);
   }
   // clear out any old question choices
   // questionChoices.innerHTML = "";
