@@ -59,7 +59,7 @@ function retrieveQustion() {
     // add an event listener to each choice
      // check the answer
      choice.addEventListener("click", function () {
-      if (questions[currentQuestionIndex].choices === questions[currentQuestionIndex].answer) {
+      if (choice.value === questions[currentQuestionIndex].answer) {
         console.log(question[currentQuestionIndex].choices);
         questionAnswer.textContent = "Correctly";
         sfxRight.play();
