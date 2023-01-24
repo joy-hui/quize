@@ -1,31 +1,39 @@
 var questions = [
   {
     title: " Commonly used data types DO NOT include",
-    choices: ["string "," booleans","alert","number"], 
-    answer:"alert"
+    choices: ["string ", " booleans", "alert", "number"],
+    answer: "alert",
   },
 
   {
-    title: " Arrays in JavaScript can be used to store",
-    choices: ["strings and numbers "," other arrays","boolens","all of about"], 
-    answer:"all of about"
+    title: " Inside which HTML element do we put the JavaScript?",
+    choices: ["<js>", "<script>", "<scripting>", "<javascript>"],
+    answer: "<script>",
   },
 
   {
-    title: " Arrays in JavaScript can be used to store",
-    choices: ["strings and numbers "," other arrays","boolens","all of about"], 
-    answer:"all of about"
+    title: " How do you create a function in JavaScript?",
+    choices: [
+      "function myFunction()",
+      "function=myFunction()",
+      "function:myFunction()",
+    ],
+    answer: "function myFunction()",
   },
 
   {
-    title: " Arrays in JavaScript can be used to store",
-    choices: ["strings and numbers "," other arrays","boolens","all of about"], 
-    answer:"all of about"
+    title: " How do you call a function named myFunction?",
+    choices: [
+      "call myFunction()",
+      "myFunction()",
+      "call function myFunction()",
+    ],
+    answer: "myFunction()",
   },
 
   {
-    title: " Arrays in ",
-    choices: ["strings and numbers "," other arrays","boolens","all of about"], 
-    answer:"all of about"
-  }
+    title: " JavaScript is the same as Java ",
+    choices: ["False", " True"],
+    answer: "False",
+  },
 ];

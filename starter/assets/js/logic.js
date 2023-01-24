@@ -6,7 +6,7 @@ var timer = document.getElementById("time");
 var finalScoreEl = document.getElementById("final-score");
 var initialsEl = document.getElementById("initials");
 var submitButton = document.getElementById("submit");
-var timecount = 76;
+var timecount = 60;
 var finalScore;
 var score = 0;
 var currentQuestionIndex = 0;
@@ -32,56 +32,112 @@ startbutton.addEventListener("click", function () {
   retrieveQustion();
 });
 
-// retrieve the question
+// click even inside of the retrieveQuestion function
 function retrieveQustion() {
   var questionTitle = document.getElementById("question-title");
   var questionChoices = document.getElementById("choices");
-  var questionAnswer = document.getElementById("answer");
-  var sfxRight = new Audio("assets/sfx/correct.wav");
-  var sfxWrong = new Audio("assets/sfx/incorrect.wav");
+  questionChoices.innerHTML = "";
   //var currentQuestion = question[currentQuestionIndex];
-
   // get current question object from array
   var question = questions[currentQuestionIndex];
-  console.log(question);
-
+  //console.log(question);
   // update title with current question
   //var questionTitle = document.getElementById("question-title");
   questionTitle.textContent = question.title;
 
-  for (var i = 0; i < question.choices; i++) {
+  for (var i = 0; i < question.choices.length; i++) {
     var choice = document.createElement("button");
-        choice.setAttribute("class", "choice");
-        choice.setAttribute("value", choice);
-        choice.textContent = question.choices[i];
-        questionChoices.appendChild(choice);
-  
+    choice.setAttribute("class", "choice");
+    choice.setAttribute("value", choice);
+    choice.textContent = question.choices[i];
+    //console.log(choice);
+    questionChoices.appendChild(choice); // moved this into the loop bc we need to add them to the page after adding the event listener
     // add an event listener to each choice
-     // check the answer
-     choice.addEventListener("click", function () {
-      if (choice.value === questions[currentQuestionIndex].answer) {
-        console.log(question[currentQuestionIndex].choices);
-        questionAnswer.textContent = "Correctly";
-        sfxRight.play();
-        score++;
-        currentQuestionIndex++;
-      } else {
-        questionAnswer.textContent = "Incorrectly";
-        sfxWrong.play();
-        score--;
-        currentQuestionIndex++;
-        var time = timer.textContent;
-        timecount = time++;
-      }
-      return score;
-    });
+    // check the answer
+    choice.addEventListener("click", questionClick);
     // clear out any old question choices
-    questionChoices.innerHTML = "";
-
-  
+    //questionChoices.innerHTML = "";
   }
-  
+  // clear out any old question choices
+ // questionChoices.innerHTML = "";
 }
+
+
+function questionClick(event) {
+  // code that determines what happens when the question is clicked
+  console.log(questions[currentQuestionIndex].answer);
+  var questionAnswer = document.getElementById("answer");
+  var sfxRight = new Audio("assets/sfx/correct.wav");
+  var sfxWrong = new Audio("assets/sfx/incorrect.wav");
+  if (event.target.textContent === questions[currentQuestionIndex].answer) {
+    //console.log(question[currentQuestionIndex].choices);
+    questionAnswer.textContent = "Correctly";
+    sfxRight.play();
+    score+=10;
+  } else {
+    questionAnswer.textContent = "Incorrectly";
+    sfxWrong.play();
+    score-=10;
+    var time = timer.textContent;
+    timecount = time++;
+  }
+  currentQuestionIndex++;
+  console.log(currentQuestionIndex);
+  retrieveQustion();
+  // clear out any old question choices
+  // var questionChoices = document.getElementById("choices");
+  // questionChoices.innerHTML = "";
+}
+
+// retrieve the question
+// function retrieveQustion() {
+//   var questionTitle = document.getElementById("question-title");
+//   var questionChoices = document.getElementById("choices");
+//   var questionAnswer = document.getElementById("answer");
+//   var sfxRight = new Audio("assets/sfx/correct.wav");
+//   var sfxWrong = new Audio("assets/sfx/incorrect.wav");
+//   //var currentQuestion = question[currentQuestionIndex];
+
+//   // get current question object from array
+//   var question = questions[currentQuestionIndex];
+//   console.log(question);
+
+//   // update title with current question
+//   //var questionTitle = document.getElementById("question-title");
+//   questionTitle.textContent = question.title;
+
+//   for (var i = 0; i < question.choices; i++) {
+//     var choice = document.createElement("button");
+//         choice.setAttribute("class", "choice");
+//         choice.setAttribute("value", choice);
+//         choice.textContent = question.choices[i];
+//         questionChoices.appendChild(choice);
+
+//     // add an event listener to each choice
+//      // check the answer
+//      choice.addEventListener("click", function () {
+//       if (choice.value === questions[currentQuestionIndex].answer) {
+//         console.log(question[currentQuestionIndex].choices);
+//         questionAnswer.textContent = "Correctly";
+//         sfxRight.play();
+//         score++;
+
+//       } else {
+//         questionAnswer.textContent = "Incorrectly";
+//         sfxWrong.play();
+//         score--;
+//         var time = timer.textContent;
+//         timecount = time++;
+//       }
+//       return score;
+//       currentQuestionIndex++;
+//     });
+//     // clear out any old question choices
+//     questionChoices.innerHTML = "";
+
+//   }
+
+// }
 
 //function to end the quiz
 function endQuiz() {
@@ -109,5 +165,5 @@ submitButton.addEventListener("click", function () {
   // set updated array to local storage
   localStorage.setItem("highScores", JSON.stringify(highScoresList));
   // go to highscores page
-  window.location.href = "/starter/highscores.html";
+  //window.location.href = "/starter/highscores.html";
 });
