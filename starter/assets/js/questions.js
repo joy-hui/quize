@@ -33,7 +33,7 @@ var questions = [
 
   {
     title: " JavaScript is the same as Java ",
-    choices: ["False", " True"],
+    choices: ["False", "True"],
     answer: "False",
   },
 ];

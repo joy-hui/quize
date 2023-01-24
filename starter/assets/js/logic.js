@@ -54,18 +54,22 @@ function retrieveQustion() {
     questionChoices.appendChild(choice); // moved this into the loop bc we need to add them to the page after adding the event listener
     // add an event listener to each choice
     // check the answer
-    choice.addEventListener("click", questionClick);
+    if (currentQuestionIndex < 5) {
+      choice.addEventListener("click", questionClick);
+    } else {
+      endQuiz();
+    }
+
     // clear out any old question choices
     //questionChoices.innerHTML = "";
   }
   // clear out any old question choices
- // questionChoices.innerHTML = "";
+  // questionChoices.innerHTML = "";
 }
-
 
 function questionClick(event) {
   // code that determines what happens when the question is clicked
-  console.log(questions[currentQuestionIndex].answer);
+  //console.log(questions[currentQuestionIndex].answer);
   var questionAnswer = document.getElementById("answer");
   var sfxRight = new Audio("assets/sfx/correct.wav");
   var sfxWrong = new Audio("assets/sfx/incorrect.wav");
@@ -73,16 +77,16 @@ function questionClick(event) {
     //console.log(question[currentQuestionIndex].choices);
     questionAnswer.textContent = "Correctly";
     sfxRight.play();
-    score+=10;
+    score += 10;
   } else {
     questionAnswer.textContent = "Incorrectly";
     sfxWrong.play();
-    score-=10;
+    score -= 10;
     var time = timer.textContent;
     timecount = time++;
   }
   currentQuestionIndex++;
-  console.log(currentQuestionIndex);
+  //console.log(currentQuestionIndex);
   retrieveQustion();
   // clear out any old question choices
   // var questionChoices = document.getElementById("choices");
@@ -151,8 +155,10 @@ function endQuiz() {
 //function to handle saving the high score
 submitButton.addEventListener("click", function () {
   var initials = initialsEl.value;
+  //console.log(initials);
   var highScoresList = JSON.parse(localStorage.getItem("highScores")) || [];
   highScoresList.push({ initials: initials, score: finalScore });
+  console.log(highScoresList);
   highScoresList = highScoresList.sort((curr, next) => {
     if (curr.score < next.score) {
       return 1;
@@ -165,5 +171,6 @@ submitButton.addEventListener("click", function () {
   // set updated array to local storage
   localStorage.setItem("highScores", JSON.stringify(highScoresList));
   // go to highscores page
+  window.location.href="file:///Users/huizhao/bootcamp/quize/starter/highscores.html"; 
   //window.location.href = "/starter/highscores.html";
 });
