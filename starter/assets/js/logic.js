@@ -82,8 +82,9 @@ function questionClick(event) {
     questionAnswer.textContent = "Incorrectly";
     sfxWrong.play();
     score -= 10;
-    var time = timer.textContent;
-    timecount = time++;
+    //var time = timer.textContent;
+    timecount+=1;
+    timer.textContent=timecount;
   }
   currentQuestionIndex++;
   //console.log(currentQuestionIndex);
@@ -158,7 +159,7 @@ submitButton.addEventListener("click", function () {
   //console.log(initials);
   var highScoresList = JSON.parse(localStorage.getItem("highScores")) || [];
   highScoresList.push({ initials: initials, score: finalScore });
-  console.log(highScoresList);
+  //console.log(highScoresList);
   highScoresList = highScoresList.sort((curr, next) => {
     if (curr.score < next.score) {
       return 1;
@@ -171,6 +172,7 @@ submitButton.addEventListener("click", function () {
   // set updated array to local storage
   localStorage.setItem("highScores", JSON.stringify(highScoresList));
   // go to highscores page
-  window.location.href="file:///Users/huizhao/bootcamp/quize/starter/highscores.html"; 
+  window.location.href =
+    "file:///Users/huizhao/bootcamp/quize/starter/highscores.html";
   //window.location.href = "/starter/highscores.html";
 });
