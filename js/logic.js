@@ -65,7 +65,7 @@ function retrieveQustion() {
   }else {
     endQuiz();
     timer.innerHTML = "0";
-    clearInterval(timerInterval);
+    //clearInterval(timerInterval);
   }
   // clear out any old question choices
   // questionChoices.innerHTML = "";
@@ -75,8 +75,8 @@ function questionClick(event) {
   // code that determines what happens when the question is clicked
   //console.log(questions[currentQuestionIndex].answer);
   var questionAnswer = document.getElementById("answer");
-  var sfxRight = new Audio("assets/sfx/correct.wav");
-  var sfxWrong = new Audio("assets/sfx/incorrect.wav");
+  var sfxRight = new Audio("sfx/correct.wav");
+  var sfxWrong = new Audio("sfx/incorrect.wav");
   if (event.target.textContent === questions[currentQuestionIndex].answer) {
     //console.log(question[currentQuestionIndex].choices);
     questionAnswer.textContent = "Correctly";
